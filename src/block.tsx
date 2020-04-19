@@ -51,11 +51,11 @@ interface Block {
 }
 
 export const Block: React.FC<Block> = props => {
-  const { block, parentBlock, children } = props;
+  const { block, parentBlock, children, ...p } = props;
   const blockValue = block?.value;
   switch (blockValue.type) {
     case "page":
-      return <div className="notion">{children}</div>;
+      return <div className="notion" {...p}>{children}</div>;
     case "header":
       if (!blockValue.properties) return null;
       return (

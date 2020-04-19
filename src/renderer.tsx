@@ -10,8 +10,9 @@ interface NotionRendererProps {
 
 export const NotionRenderer: React.FC<NotionRendererProps> = ({
   level = 0,
-  currentId,
-  blockMap
+    currentId,
+  blockMap,
+  ...p
 }) => {
   const id = currentId || Object.keys(blockMap)[0];
   const currentBlock = blockMap[id];
@@ -23,9 +24,11 @@ export const NotionRenderer: React.FC<NotionRendererProps> = ({
       level={level}
       block={currentBlock}
       parentBlock={parentBlock}
+      {...p}
     >
       {currentBlock?.value?.content?.map(contentId => (
         <NotionRenderer
+          {...p}
           key={contentId}
           currentId={contentId}
           blockMap={blockMap}
